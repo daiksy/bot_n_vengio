@@ -49,7 +49,6 @@ public class DaiksyBotServlet extends HttpServlet {
             log.info(e.getMessage());
         }
 
-        //cache内にaccesstoken/secretが無い場合はDataStoreから読み込む
         if((String)cache.get(cachedtoken) == null ||
                                     (String)cache.get(cachedsecret) == null ){
 
@@ -98,120 +97,126 @@ public class DaiksyBotServlet extends HttpServlet {
  
     	HashMap<String, Integer> dataMap = getDataMap();
         
-        Double power = 0.0;
+    	Double power = 0.0;
 
-        for(int i=0;i<s.length();i++){
-            Integer point = dataMap.get(String.valueOf(s.charAt(i)));
-            if (point != null){
-                power += point;
-            } else {
-                power += 0;
-            }
-        }
+    	for(int i=0;i<s.length();i++){
+    		Integer point = dataMap.get(String.valueOf(s.charAt(i)));
+    		if (point != null){
+				power += point;
+    		} else {
+				power += 0;
+    		}
+    	}
 
-        Double score = (power / s.length());
+    	Double score = (power / s.length());
 
-        DecimalFormat df = new DecimalFormat(",##0.0");
-        return s + "のブランド力は" + df.format(new BigDecimal(Double.toString(score))) + "だね。";    
+    	DecimalFormat df = new DecimalFormat(",##0.0");
+    	return s + "のブランド力は" + df.format(new BigDecimal(Double.toString(score))) + "だね。";    
     }
     
     private HashMap<String, Integer> getDataMap() {
         HashMap<String, Integer> m = new HashMap<String, Integer>();
-        m.put("ア", 1);
-        m.put("イ", 2);
-        m.put("ウ", 3);
-        m.put("エ", 4);
-        m.put("オ", 5);
+        m.put("ア", 25);
+        m.put("イ", 41);
+        m.put("ウ", 6);
+        m.put("エ", 21);
+        m.put("オ", 6);
         
-        m.put("カ", 1);
-        m.put("キ", 2);
-        m.put("ク", 3);
-        m.put("ケ", 4);
+        m.put("カ", 4);
+        m.put("キ", 8);
+        m.put("ク", 15);
+        m.put("ケ", 3);
         m.put("コ", 5);       
 
-        m.put("サ", 1);
-        m.put("シ", 2);
-        m.put("ス", 3);
-        m.put("セ", 4);
-        m.put("ソ", 5);
+        m.put("サ", 6);
+        m.put("シ", 24);
+        m.put("ス", 30);
+        m.put("セ", 5);
+        m.put("ソ", 6);
         
-        m.put("タ", 1);
-        m.put("チ", 2);
-        m.put("ツ", 3);
-        m.put("テ", 4);
-        m.put("ト", 5);
+        m.put("タ", 4);
+        m.put("チ", 12);
+        m.put("ツ", 1);
+        m.put("テ", 12);
+        m.put("ト", 19);
         
-        m.put("ナ", 1);
-        m.put("二", 2);
+        m.put("ナ", 14);
+        m.put("二", 8);
         m.put("ヌ", 3);
-        m.put("ネ", 4);
-        m.put("ノ", 5);        
+        m.put("ネ", 1);
+        m.put("ノ", 0);        
         
-        m.put("ハ", 1);
-        m.put("ヒ", 2);
-        m.put("フ", 3);
-        m.put("ヘ", 4);
-        m.put("ホ", 5);
+        m.put("ハ", 3);
+        m.put("ヒ", 0);
+        m.put("フ", 14);
+        m.put("ヘ", 1);
+        m.put("ホ", 1);
         
-        m.put("マ", 1);
-        m.put("ミ", 2);
-        m.put("ム", 3);
-        m.put("メ", 4);
-        m.put("モ", 5);
+        m.put("マ", 12);
+        m.put("ミ", 9);
+        m.put("ム", 6);
+        m.put("メ", 2);
+        m.put("モ", 7);
         
         m.put("ヤ", 1);
-        m.put("ユ", 3);
-        m.put("ヨ", 5);
+        m.put("ユ", 0);
+        m.put("ヨ", 0);
         
-        m.put("ラ", 1);
-        m.put("リ", 2);
-        m.put("ル", 3);
-        m.put("レ", 4);
-        m.put("ロ", 5);
+        m.put("ラ", 39);
+        m.put("リ", 29);
+        m.put("ル", 45);
+        m.put("レ", 10);
+        m.put("ロ", 16);
         
         m.put("ワ", 1);
-        m.put("ヲ", 5);
-        m.put("ン", 0);
+        m.put("ヲ", 0);
+        m.put("ン", 48);
         
-        m.put("ガ", 1);
-        m.put("ギ", 2);
-        m.put("グ", 3);
-        m.put("ゲ", 4);
-        m.put("ゴ", 5);
+        m.put("ガ", 13);
+        m.put("ギ", 4);
+        m.put("グ", 12);
+        m.put("ゲ", 1);
+        m.put("ゴ", 	3);
         
-        m.put("ザ", 1);
-        m.put("ジ", 2);
-        m.put("ズ", 3);
-        m.put("ゼ", 4);
-        m.put("ゾ", 5);        
+        m.put("ザ", 4);
+        m.put("ジ", 21);
+        m.put("ズ", 14);
+        m.put("ゼ", 3);
+        m.put("ゾ", 1);        
 
-        m.put("ダ", 1);
-        m.put("ヂ", 2);
-        m.put("ヅ", 3);
-        m.put("デ", 4);
-        m.put("ド", 5);        
+        m.put("ダ", 12);
+        m.put("ヂ", 0);
+        m.put("ヅ", 0);
+        m.put("デ", 17);
+        m.put("ド", 8);        
         
-        m.put("バ", 1);
-        m.put("ビ", 2);
-        m.put("ブ", 3);
-        m.put("ベ", 4);
-        m.put("ボ", 5);        
+        m.put("バ", 14);
+        m.put("ビ", 6);
+        m.put("ブ", 12);
+        m.put("ベ", 3);
+        m.put("ボ", 3);        
         
-        m.put("パ", 1);
-        m.put("ピ", 2);
-        m.put("プ", 3);
-        m.put("ペ", 4);
-        m.put("ポ", 5);        
+        m.put("パ", 3);
+        m.put("ピ", 4);
+        m.put("プ", 11);
+        m.put("ペ", 2);
+        m.put("ポ", 3);        
         
-        m.put("ァ", 1);
-        m.put("ィ", 2);
-        m.put("ゥ", 3);
-        m.put("ェ", 4);
-        m.put("ォ", 5);        
+        m.put("ァ", 8);
+        m.put("ィ", 19);
+        m.put("ゥ", 2);
+        m.put("ェ", 14);
+        m.put("ォ", 3);        
 
-        m.put("ャ", 1);
-        m.put("ュ", 3);
-        m.put("ョ", 5);
+        m.put("ャ", 9);
+        m.put("ュ", 20);
+        m.put("ョ", 6);
+        
+        m.put("ッ", 30);
+        
+        m.put("ヴ", 10);        
+        
+        m.put("ー", 20);
         
         return m;
     }
