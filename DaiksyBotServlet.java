@@ -78,14 +78,14 @@ public class DaiksyBotServlet extends HttpServlet {
         
         try {
             statuses = twitter.getMentions(paging);
-
+            
             for(Status status:statuses){
             	if( !(status.getUser().getScreenName().equals(twitter.getScreenName())) &&
         			 status.getText().trim().substring(0, botname.length()+1).equals("@"+botname) &&
         			 (BotUtil.checkTime(status, 1080000))
         			 ){
             		 	String targetString = status.getText().replaceAll("@"+botname, "").trim();
-            		 	twitter.updateStatus(editTweet(targetString));
+            		 	twitter.updateStatus(".@" + status.getUser().getScreenName() + " " + editTweet(targetString));
                     }
             }
     	} catch (TwitterException e) {
@@ -102,13 +102,13 @@ public class DaiksyBotServlet extends HttpServlet {
     	for(int i=0;i<s.length();i++){
     		Integer point = dataMap.get(String.valueOf(s.charAt(i)));
     		if (point != null){
-				power += point;
+    			power += point;
     		} else {
-				power += 0;
+    			power += 0;
     		}
     	}
 
-    	Double score = (power / s.length());
+    	Double score = (power / s.trim().length());
 
     	DecimalFormat df = new DecimalFormat(",##0.0");
     	return s + "‚Ìƒuƒ‰ƒ“ƒh—Í‚Í" + df.format(new BigDecimal(Double.toString(score))) + "‚¾‚ËB";    
@@ -176,7 +176,7 @@ public class DaiksyBotServlet extends HttpServlet {
         m.put("ƒM", 4);
         m.put("ƒO", 12);
         m.put("ƒQ", 1);
-        m.put("ƒS", 	3);
+        m.put("ƒS", 3);
         
         m.put("ƒU", 4);
         m.put("ƒW", 21);
