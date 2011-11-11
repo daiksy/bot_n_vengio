@@ -230,6 +230,11 @@ public class DaiksyBotServlet extends HttpServlet {
      */
     private String editTweet(String targetString){
     	
+    	if (targetString.indexOf("変態") != -1)
+    	{
+    		return "←　お巡りさん、この人です！";
+    	}
+    	
     	Double power = 0.0;
 
     	for(int i=0;i<targetString.length();i++){
