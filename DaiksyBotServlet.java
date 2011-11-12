@@ -210,7 +210,7 @@ public class DaiksyBotServlet extends HttpServlet {
             		 	tweetString.append(".@");
             		 	tweetString.append(status.getUser().getScreenName());
             		 	tweetString.append(" ");
-            		 	tweetString.append(editTweet(targetString));
+            		 	tweetString.append(editTweet(targetString, status.getUser().getScreenName()));
             		 	twitter.updateStatus(tweetString.toString());
                     }
             }
@@ -226,13 +226,24 @@ public class DaiksyBotServlet extends HttpServlet {
      * Tweetとして編集して返却する。
      * 
      * @param targetString ブランド力を測定したい文字列
+     * @param targetID     元発言者のID
      * @return Tweetすべき内容
      */
-    private String editTweet(String targetString){
+    private String editTweet(String targetString, String targetID){
+    	
+    	log.info(targetString);
+    	StringBuilder result = new StringBuilder();
     	
     	if (targetString.indexOf("変態") != -1)
     	{
-    		return "←　お巡りさん、この人です！";
+    		log.info("hentai edit");
+    		
+    		result.append("←　お巡りさん、この人です！ RT @");
+    		result.append(targetID);
+    		result.append(" ");
+    		result.append(targetString);
+    		
+    		return result.toString();
     	}
     	
     	Double power = 0.0;
@@ -249,8 +260,6 @@ public class DaiksyBotServlet extends HttpServlet {
     	Double score = (power / targetString.trim().length());
 
     	DecimalFormat df = new DecimalFormat(",##0.0");
-    	
-    	StringBuilder result = new StringBuilder();
     	
     	result.append(targetString);
     	result.append("のブランド力は");
